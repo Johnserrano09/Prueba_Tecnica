@@ -1,11 +1,11 @@
 package com.example.PruebaTecnica2.vehicles.dtos;
 
-public class MessageResponse {
+public class OperationResponseDto {
     private String message;
     
-    public MessageResponse() {}
+    public OperationResponseDto() {}
     
-    public MessageResponse(String message) {
+    public OperationResponseDto(String message) {
         this.message = message;
     }
     

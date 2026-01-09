@@ -1,6 +1,6 @@
 package com.example.PruebaTecnica2.vehicles.services;
 
-import com.example.PruebaTecnica2.vehicles.dtos.vehiclesResponseDto;
+import com.example.PruebaTecnica2.vehicles.dtos.VehicleResponseDto;
 import com.example.PruebaTecnica2.vehicles.entities.vehicles;
 import com.example.PruebaTecnica2.vehicles.mappers.VehiclesMapper;
 import com.example.PruebaTecnica2.vehicles.repositories.VehiclesRepository;
@@ -18,7 +18,7 @@ public class VehiclesService {
     private VehiclesRepository vehiclesRepository;
     
     // ENDPOINT 1
-    public List<vehiclesResponseDto> getAllActiveVehicles() {
+    public List<VehicleResponseDto> getAllActiveVehicles() {
         List<vehicles> vehicles = vehiclesRepository.findByDeleted("N");
         return vehicles.stream()
                 .map(VehiclesMapper::toResponse)
@@ -26,7 +26,7 @@ public class VehiclesService {
     }
     
     // ENDPOINT 2
-    public List<vehiclesResponseDto> getLowStockExpensiveVehicles() {
+    public List<VehicleResponseDto> getLowStockExpensiveVehicles() {
         List<vehicles> vehicles = vehiclesRepository.findByPriceAndStockAndDeleted(20000, 10, "N");
         return vehicles.stream()
                 .map(VehiclesMapper::toResponse)
@@ -56,7 +56,7 @@ public class VehiclesService {
     }
     
     // ENDPOINT 4
-    public Optional<vehiclesResponseDto> updateVehicleStock(long id, int newStock) {
+    public Optional<VehicleResponseDto> updateVehicleStock(long id, int newStock) {
         Optional<vehicles> vehicle = vehiclesRepository.findById(id);
         
         if (vehicle.isEmpty()) {

@@ -19,7 +19,7 @@ SCORE = 0
 valid_get_all = False
 valid_get_condition = False
 delete_endpoint_ok = False
-update_endpoint_ok = False
+update_endpoint_ok = False 
 
 
 # -----------------------------

@@ -1,16 +1,16 @@
 package com.example.PruebaTecnica2.vehicles.dtos;
 
-public class vehiclesResponseDto {
+public class VehicleResponseDto {
     
-    private long id;
+    private Long id;
     private String brand;
     private String model;
-    private double price;
+    private Double price;
     private Integer stock;
     
-    public vehiclesResponseDto() {}
+    public VehicleResponseDto() {}
     
-    public vehiclesResponseDto(long id, String brand, String model, double price, Integer stock) {
+    public VehicleResponseDto(Long id, String brand, String model, Double price, Integer stock) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -18,11 +18,11 @@ public class vehiclesResponseDto {
         this.stock = stock;
     }
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
     
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
@@ -42,11 +42,11 @@ public class vehiclesResponseDto {
         this.model = model;
     }
     
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
     
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     
