@@ -19,54 +19,50 @@ public class VehiclesController {
     @Autowired
     private VehiclesService vehiclesService;
     
-    // ENDPOINT 1: GET /api/vehicles
-    // Retorna todos los vehículos activos
+    // ENDPOINT 1
     @GetMapping
     public ResponseEntity<List<VehicleResponseDto>> getAllVehicles() {
         List<VehicleResponseDto> vehicles = vehiclesService.getAllActiveVehicles();
         return ResponseEntity.ok(vehicles);
     }
     
-    // ENDPOINT 2: GET /api/vehicles/low-stock-expensive
-    // Retorna vehículos con price > 20000 y stock < 10
+    // ENDPOINT 2
     @GetMapping("/low-stock-expensive")
     public ResponseEntity<List<VehicleResponseDto>> getLowStockExpensive() {
         List<VehicleResponseDto> vehicles = vehiclesService.getLowStockExpensiveVehicles();
         return ResponseEntity.ok(vehicles);
     }
     
-    // ENDPOINT 3: PATCH /api/vehicles/delete/{model}
-    // Eliminación lógica de vehículos por modelo
+    // ENDPOINT 3
     @PatchMapping("/delete/{model}")
     public ResponseEntity<?> deleteVehicleByModel(@PathVariable String model) {
         String result = vehiclesService.deleteVehicleByModel(model);
         
         if (result == null) {
-            // Vehículo no existe
+            
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new OperationResponseDto("El vehículo con modelo '" + model + "' no existe."));
         } else if ("already_deleted".equals(result)) {
-            // Vehículo ya estaba eliminado
+           
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new OperationResponseDto("El vehículo con modelo '" + model + "' ya se encuentra eliminado."));
         } else {
-            // Vehículo eliminado exitosamente
+        
             return ResponseEntity.ok(new OperationResponseDto("Vehículo con modelo '" + model + "' eliminado correctamente."));
         }
     }
     
-    // ENDPOINT 4: PATCH /api/vehicles/stock
-    // Actualizar stock de un vehículo
+    // ENDPOINT 4
     @PatchMapping("/stock")
     public ResponseEntity<?> updateStock(@RequestBody VehicleStockRequestDto request) {
         Optional<VehicleResponseDto> result = vehiclesService.updateVehicleStock(request.getId(), request.getStock());
         
         if (result.isEmpty()) {
-            // Vehículo no existe
+            
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new OperationResponseDto("El vehículo con ID " + request.getId() + " no existe."));
         } else {
-            // Vehículo actualizado exitosamente
+          
             return ResponseEntity.ok(result.get());
         }
     }
